@@ -1,0 +1,45 @@
+﻿<Window x:Class="CarRental.Views.Windows.Customer.WindowRental"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cmd="clr-namespace:CarRental.Commands"
+        xmlns:cv="clr-namespace:CarRental.Recources.Converter"
+        xmlns:vm="clr-namespace:CarRental.ViewModels.Customer"
+        mc:Ignorable="d"
+        Height="200" Width="500"
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+
+    <Window.DataContext>
+        <vm:PageRentalCarViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <cmd:CommandOrder x:Key="CommandOrder"/>
+        <cv:MyConverter x:Key="convert"/>
+    </Window.Resources>
+    
+    <Grid Background="{DynamicResource MaterialDesignPaper}">
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left"
+                    Margin="80,30">
+            <TextBlock Text="Выберите дату заказа:"/>
+            <DatePicker x:Name="dateOfIssue"/>
+        </StackPanel>
+        <StackPanel VerticalAlignment="top" HorizontalAlignment="Right"
+                    Margin="80,30">
+            <TextBlock Text="Выберите дату возврата:"/>
+            <DatePicker x:Name="dateOfReturn"/>
+        </StackPanel>
+
+        <Button Height="25" Width="200" Content="Арендовать"
+                VerticalAlignment="Bottom" Margin="0,30"
+                Command="{StaticResource CommandOrder}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource convert}">
+                    <Binding ElementName="dateOfIssue" Path="SelectedDate"/>
+                    <Binding ElementName="dateOfReturn" Path="SelectedDate"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </Grid>
+</Window>

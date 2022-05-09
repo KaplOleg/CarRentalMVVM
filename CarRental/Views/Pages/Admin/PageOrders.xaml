@@ -1,0 +1,84 @@
+﻿<Page x:Name="page"
+      x:Class="CarRental.Views.Pages.Admin.PageOrders"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="clr-namespace:CarRental.ViewModels.Admin"
+      xmlns:cv="clr-namespace:CarRental.Recources.Converter"
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="1000"
+      Title="Заказы">
+    <Page.DataContext>
+        <vm:PageOrdersViewModels/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <cv:MyConverter x:Key="converter"/>
+    </Page.Resources>
+
+    <Grid Background="{DynamicResource PrimaryHueMidBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="530*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding ElementName=page, Path=Title}" Grid.Row="0"
+                           FontSize="20" FontWeight="Bold" Foreground="{DynamicResource MaterialDesignPaper}"
+                           VerticalAlignment="Center" Margin="40 0"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="20,0">
+            <TextBlock Text="Найти по ФИО" VerticalAlignment="Center" Margin="20,0"
+                         FontSize="16" FontWeight="Bold" Foreground="{DynamicResource MaterialDesignPaper}"/>
+            <TextBox Width="250" Height="40" SelectionChanged="Search_Customer"
+                     FontSize="16" FontWeight="SemiBold"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     Background="{StaticResource MaterialDesignPaper}"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dataGrid" Margin="5"
+                  Grid.Row="1" 
+                  AutoGenerateColumns="False" ColumnWidth="*"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding Orders}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО Клиента">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{} {0} {1} {2}">
+                            <Binding Path="Сustomers.Surname"/>
+                            <Binding Path="Сustomers.Firstname"/>
+                            <Binding Path="Сustomers.Lastname"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="Выданный автомобиль">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{} {0} {1}">
+                            <Binding Path="Cars.CarBrands.BrandName"/>
+                            <Binding Path="Cars.CarModels.ModelName"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Дата выдачи:" Binding="{Binding DateOfIssue, StringFormat='\{0:dd.MM.yyyy\}'}"/>
+                <DataGridTextColumn Header="Дата возврата:" Binding="{Binding DateReturn, StringFormat='\{0:dd.MM.yyyy\}'}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="2"
+                Width="150" Height="30"
+                Content="Удалить"
+                Style="{StaticResource MaterialDesignPaperButton}"
+                Command="{Binding BtnClickRemove}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource converter}">
+                    <Binding ElementName="dataGrid" Path="SelectedItem"/>
+                    <Binding ElementName="dataGrid"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </Grid>
+</Page>

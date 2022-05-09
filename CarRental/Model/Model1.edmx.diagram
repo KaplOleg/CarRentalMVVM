@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5e28f6c74a27455ea976a58aa2868445" Name="Diagram1">
+        <EntityTypeShape EntityType="CarRentalModel.Admins" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.CarBrands" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.CarLocations" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.CarModels" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.Cars" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.CarSpecifications" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.Orders" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.Сustomers" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.OrderAmountCustomer" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="CarRentalModel.FK_Admin_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarRentalModel.FK_Brand_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarRentalModel.FK_Location_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarRentalModel.FK_Model_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarRentalModel.FK_Car_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarRentalModel.FK_Specification_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarRentalModel.FK_Customer_id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

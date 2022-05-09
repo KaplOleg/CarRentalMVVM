@@ -1,0 +1,64 @@
+﻿<Window x:Name="documentOrder"
+        x:Class="CarRental.Views.Windows.Customer.WindowDocument"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:vm="clr-namespace:CarRental.ViewModels.Customer"      
+        mc:Ignorable="d"
+        Title="Договор" Height="750" Width="600"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <vm:PageOrderDocViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/CarRental;component/Recources/Document.png"/>
+        </Grid.Background>
+
+        <TextBlock FontSize="16" FontWeight="SemiBold"
+                   VerticalAlignment="Top" HorizontalAlignment="Right"
+                   Margin="0 82 45 0">
+            <Run Text="{Binding SelectedOrders.Сustomers.Surname}"></Run>
+            <Run Text="{Binding SelectedOrders.Сustomers.Firstname}"></Run>
+            <Run Text="{Binding SelectedOrders.Сustomers.Lastname}"></Run>
+        </TextBlock>
+
+        <TextBlock FontSize="16" FontWeight="SemiBold"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Margin="0 0 0 198">
+            <Run Text="{Binding SelectedOrders.Cars.CarBrands.BrandName}"></Run>
+            <Run Text="{Binding SelectedOrders.Cars.CarModels.ModelName}"></Run>
+        </TextBlock>
+
+
+        <TextBlock FontSize="16" FontWeight="SemiBold"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Margin="0 35 345 0">
+            <Run Text="{Binding SelectedOrders.DateOfIssue, StringFormat=D, ConverterCulture=ru}"></Run>
+        </TextBlock>
+
+        <TextBlock FontSize="16" FontWeight="SemiBold"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Margin="380 35 0 0">
+            <Run Text="{Binding SelectedOrders.DateReturn, StringFormat=D, ConverterCulture=ru}"></Run>
+        </TextBlock>
+
+        <TextBlock FontSize="16" FontWeight="SemiBold"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                   Margin="0 0 70 188"> 
+            <Run Text="{Binding OrderAmountCustomer}"></Run>
+            <Run Text=" руб."></Run>
+        </TextBlock>
+
+        <Button Height="35" Width="50" 
+                VerticalAlignment="Top" HorizontalAlignment="Right"
+                Margin="25,10"
+                Click="PrintTicket">
+            <fa:FontAwesome Icon="Solid_Print" Height="14"/>
+        </Button>
+    </Grid>
+</Window>
